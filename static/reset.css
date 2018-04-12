@@ -1,0 +1,109 @@
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-weight: normal;
+	vertical-align: baseline;
+	background: transparent;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+html, body {
+	background-color: #efeff4;
+	font-size: 14px;
+}
+
+body{
+	-webkit-overflow-scrolling: touch;
+	
+}
+body.modal-open{
+	overflow: hidden;
+}
+html {
+	box-sizing: border-box;
+}
+
+*:not(#addresstextarea):not(input) {
+	-webkit-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+input{outline: none;}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.clearfix:after{
+  
+    content: '';
+    clear: both;
+    display: block;
+  
+}
+
+a {
+	text-decoration: none;
+}
+.fold-enter-active, .fold-leave-active {
+  transition: opacity .2s
+}
+.fold-enter, .fold-leave-active {
+  opacity: 0
+}
+ /* .fold-enter-active {
+   animation-name: fold-in;
+   animation-duration: 1s;
+ }
+ .fold-leave-active {
+   animation-name: fold-out;
+   animation-duration: 1s;
+ }
+ @keyframes fold-in {
+   0% {
+     opacity: 0;
+   }
+   100% {
+     opacity: 1;
+   }
+ }
+ @keyframes fold-out {
+   0% {
+     opacity: 1;
+   }
+   100% {
+     opacity: 0;
+ 	}
+ } */
+
+/*
+html,body{
+	height: 100%;
+}*/
+
+#app{
+	/* //padding-top: env(safe-area-inset-top);   为导航栏+状态栏的高度 88px */
+	margin-left: constant(safe-area-inset-left);   /*//如果未竖屏时为0*/
+	margin-right: constant(safe-area-inset-right); /*//如果未竖屏时为0*/
+	padding-bottom: constant(safe-area-inset-bottom);/*//为底下圆弧的高度 34px*/
+	margin-left: env(safe-area-inset-left);   /*//如果未竖屏时为0*/
+	margin-right: env(safe-area-inset-right); /*//如果未竖屏时为0*/
+	padding-bottom: env(safe-area-inset-bottom);/*//为底下圆弧的高度 34px*/
+
+	position: relative;
+}
+.tofix .mailAddressListPage .nonChecked,.tofix .mailAddressListPage .pick{
+	margin-bottom: constant(safe-area-inset-bottom);
+	margin-bottom: env(safe-area-inset-bottom);
+}
+.tofix .addNewMail{
+	margin-bottom: constant(safe-area-inset-bottom);
+	margin-bottom: env(safe-area-inset-bottom);
+}
