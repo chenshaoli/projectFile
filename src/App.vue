@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <v-uploadfile></v-uploadfile>
+    <!-- router-link只是为了在页面中可以点击该项按钮而已 -->
+    <!-- <router-link  to="/content">content</router-link>
+    <router-link  to="/upload">upload</router-link> -->
+   
+    <router-view></router-view>
+    <v-header></v-header>
   </div>
 </template>
-
 <script>
-import uploadfile from './components/uploadfile/uploadfile'
+import header from "./components/header/header"
 export default {
-  name: 'App',
-  components: {
-    'v-uploadfile':uploadfile
+  components:{
+    'v-header':header
   }
 }
 </script>
 
-<style>
-#app {}
-</style>
+

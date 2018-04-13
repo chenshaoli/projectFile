@@ -3,9 +3,10 @@
     
     <div class="newinput">
       <input type="file" multiple="multiple">
-      <span class="text-left">上传图片</span>
+      <span class="text-left">{{msg}}</span>
     </div>
-    <div v-for="(item,index) in obj" :key="'obj'+index" v-if="obj && obj.length && item.progress">
+    <div v-for="(item,index) in obj" :key="'obj'+index" v-if="obj && obj.length && item.progress" class="picMess">
+      <span class="delete" @click="deleteImg(item)">X</span>
       <img :src="item.dataURL" alt="">
       <p v-if='item.progress' class="progress">已完成{{item.progress}}</p>
       <p v-if="(item.name!='' || item.size)" class="progress">图片名称：<span class="name">{{item.name}}</span>大小：{{item.size}}kb</p>
@@ -21,6 +22,7 @@ export default {
   data(){
     return {
       pros:0,
+      msg:"上传图片",
       obj:[
         { 
           progress:0,
@@ -39,61 +41,62 @@ export default {
   methods:{
      uploadFun (e) {
         let that = this;
-        if(e.target.files && e.target.files.length >1){
-          let imgfiles = e.target.files;
-          let imgARR = [];
-          for(let i=0;i<imgfiles.length;i++){
-            imgARR.push(imgfiles[i]);
-          }
-          console.log(e.target.files);
-          for(let i=0;i<imgARR.length;i++){
-            let file = imgARR[i];
-            let type = file.type.split('/')[0];
-            if(type!='image') {
-              alert('请上传图片');
-              return
-            }
-            let size = Math.round(file.size/1024/1024);
-            if(size >3) {
-              alert('图片大小不能超过3M!');
-              return
-            }
-
-            let reader = new FileReader();//新建FileReader对象
-            // reader.readAsDataURL(file);
-            reader.readAsDataURL(file);//读取为base64;关键的一步，竟然给删了
-            reader.onloadstart = function () {
-              console.log('上传开始start');
-            }
-            reader.onprogress = function(e) {
-              that.pros = Math.round(e.loaded/e.total*100)+'%';
-              console.log(that.pros);
-              console.log('正在上传ing');
-            }
-            reader.onabort = function() {
-              console.log("abort");//取消上传功能；
-            }
-            reader.onerror=function () {
-              console.log("error");//上传出错；
-            }
-            reader.onload = function (){
-              console.log('上传完成');//上传完成；
-            }
-            reader.onloadend = function (e) {
-              let imgobj = {
-                progress:that.pros,
-                dataURL:reader.result,
-                name : file.name,
-                size : Math.round(file.size/1024),
-                time : new Date(file.lastModified)
+        if(that.msg =='上传图片') {
+           if(e.target.files && e.target.files.length >1){
+              let imgfiles = e.target.files;
+              let imgARR = [];
+              for(let i=0;i<imgfiles.length;i++){
+                imgARR.push(imgfiles[i]);
               }
-              that.obj.push(imgobj)
-              console.log(imgobj.name);
-              console.log(imgobj.size);
-            }
-            
-          }; 
-        } else if((e.target.files && e.target.files.length==1)) {
+              for(let i=0;i<imgARR.length;i++){
+                let file = imgARR[i];
+                let type = file.type.split('/')[0];
+                if(type!='image') {
+                  alert('请上传图片');
+                  return
+                }
+                let size = Math.round(file.size/1024/1024);
+                if(size >3) {
+                  alert('图片大小不能超过3M!');
+                  return
+                }
+
+                let reader = new FileReader();//新建FileReader对象
+                // reader.readAsDataURL(file);
+                reader.readAsDataURL(file);//读取为base64;关键的一步，竟然给删了
+                reader.onloadstart = function () {
+                  console.log('上传开始start');
+                }
+                reader.onprogress = function(e) {
+                  that.pros = Math.round(e.loaded/e.total*100)+'%';
+                  console.log(that.pros);
+                  console.log('正在上传ing');
+                }
+                reader.onabort = function() {
+                  console.log("abort");//取消上传功能；
+                }
+                reader.onerror=function () {
+                  console.log("error");//上传出错；
+                }
+                reader.onload = function (){
+                  console.log('上传完成');//上传完成；
+                }
+                reader.onloadend = function (e) {
+                  let imgobj = {
+                    progress:that.pros,
+                    dataURL:reader.result,
+                    name : file.name,
+                    size : Math.round(file.size/1024),
+                    time : new Date(file.lastModified)
+                  }
+                  that.obj.push(imgobj)
+                  console.log(imgobj.name);
+                  console.log(imgobj.size);
+                  that.msg = "修改背景图";
+                }
+                
+              }; 
+        } else if(e.target.files && e.target.files.length==1) {
               let file = e.target.files[0];
               let type = file.type.split('/')[0];
               if(type!='image') {
@@ -136,13 +139,20 @@ export default {
                 that.obj.push(imgobj)
                 console.log(that.name);
                 console.log(that.size);
+                that.msg = "修改背景图";
               }
-        }else {
-          alert('图片最多上传3张！');
+          }
+        } else {
+          console.log(111);
         }
-
-
        
+      },
+      deleteImg(it){
+        let newObj = [];
+        newObj= this.obj.filter((item)=>{
+         return item.name != it.name;
+        });
+        this.obj = newObj;
       }
   }
 }
