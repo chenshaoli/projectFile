@@ -1,10 +1,17 @@
 <template>
   <div class="imgupload" @change ='uploadFun($event)'>
-    <input type="file" >
-    <img :src="dataURL" alt="">
-    <p v-if='progress'>已完成{{progress}}</p>
-    <p v-if="(name!='' || size)">图片名称：<span>{{name}}</span>大小：{{size}}kb</p>
-    <p>上次修改时间：{{time}}</p>
+    
+    <div class="newinput">
+      <input type="file" >
+      <span class="text-left">上传图片</span>
+    </div>
+    <div>
+      <img :src="dataURL" alt="">
+      <p v-if='progress' class="progress">已完成{{progress}}</p>
+      <p v-if="(name!='' || size)" class="progress">图片名称：<span class="name">{{name}}</span>大小：{{size}}kb</p>
+      <p v-if="time" class="progress">上次修改时间：{{time}}</p>
+    </div>
+    
   </div>
  
 </template>
@@ -22,7 +29,6 @@ export default {
   },
   mounted() {
       let  imgupload = document.querySelector('.imgupload');
-     
   },
   methods:{
      uploadFun (e) {
@@ -121,6 +127,6 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang='less' scoped>
 @import './uploadfile.less';
 </style>
