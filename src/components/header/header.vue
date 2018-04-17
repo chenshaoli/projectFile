@@ -6,6 +6,7 @@
 <script>
 import content from "../content/content"
 import uploadfile from "../uploadfile/uploadfile"//引入需要配置路由的组件
+import transition from "../transition/transition"
 
 export default {
   data() {
@@ -13,7 +14,8 @@ export default {
           titleList:[
                 'content123',
                 'upload',
-                'content456'
+                'content456',
+                'transition'
           ],
           dynamicSegment:''
       }
@@ -39,6 +41,13 @@ export default {
                     component:uploadfile
                 });
                 break;
+                case "transition":
+                this.$router.push({
+                    path:'/transition',
+                    component:transition
+                });
+                break;
+
           }
          
       }

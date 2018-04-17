@@ -6,6 +6,7 @@ import uploadfile from "../components/uploadfile/uploadfile"//引入需要配置
 import iphone from "../components/iphone/iphone"
 import ipad from "../components/ipad/ipad"
 import pc from "../components/pc/pc"
+import transition from "../components/transition/transition"
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,10 @@ Vue.use(VueRouter);
     {
         path:'/',
         component:uploadfile
+    },
+    {
+        path:'/transition',
+        component:transition
     }
   ]
   const router = new VueRouter({
